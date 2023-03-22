@@ -1,20 +1,21 @@
 <?php
-
-if(isset($_POST['search']) && isset($_POST['location'])) {
+$search_param = $_POST["search"];
+$search_area = $_POST["area"];
+if(isset($_POST['search']) && isset($_POST['area'])) {
     
     $search_param = $_POST['search'];
-    $search_location = $_POST['location'];
+    $search_area = $_POST['area'];
 
-    // validate search_location and search_param
-    if(empty($search_location) || empty($search_param)) {
+    // validate search_area and search_param
+    if(empty($search_area) || empty($search_param)) {
         $data["result"] = "False";
         $data["Message"] = "Invalid search parameters";
         echo json_encode($data, JSON_UNESCAPED_SLASHES);
         exit;
     }
 
-    // validate search_location format (assuming it should be a string)
-    if(!is_string($search_location)) {
+    // validate search_area format (assuming it should be a string)
+    if(!is_string($search_area)) {
         $data["result"] = "False";
         $data["Message"] = "Invalid search area format";
         echo json_encode($data, JSON_UNESCAPED_SLASHES);
@@ -47,13 +48,13 @@ if(isset($_POST['search']) && isset($_POST['location'])) {
             $doctorid = $row["ID"];
             $doctorname = $row["Doctor_name"];
             $doctorspecialization = $row["Specialization"];
-            $doctorlocation = $row["Doctor_location"];
+            $doctorarea = $row["Doctor_area"];
            
             
             $doctor_data = array();
             $doctor_data["DocName"] = $doctorname;
             $doctor_data["Specialization"] = $doctorspecialization;
-            $doctor_data["Docloc"] = $doctorlocation;
+            $doctor_data["Docarea"] = $doctorarea;
           
 
             $data[$doctorid] = $doctor_data;
